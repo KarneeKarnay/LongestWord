@@ -13,7 +13,14 @@ public class LongestShortestWord {
 
     public static void main(String[] args) {
 
-        String input = "The cow jumped over the moon.";
+        String input = "";
+
+        if (args.length > 0){
+            input = args[0];
+        } else {
+            input = "The cow jumped over the moon.";
+        }
+
         WordOutput result = getLongestWord(input);
         String output = MessageFormat.format("The string provided was...{0}\n" +
                         "The longest word is...{1}\n" +
