@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.karneekarnay.LongestShortestWord.getLongestWord;
 import static com.karneekarnay.LongestShortestWord.getShortestWord;
@@ -86,15 +87,16 @@ public class LongestShortestWordTests {
     @Test
     public void validOutputRandomSentLongestWord() {
 
-        StringBuilder input = new StringBuilder();
-        String longwrd = " ";
+        List<String> sentenceBuilder = new ArrayList<>();
+        String longwrd = "";
         for (int i = 0; i < 15; i++) {
-            String word = getAlphaNumericString((int) (5 * Math.random()));
+            String word = getAlphaNumericString(new Random().nextInt(5 + 1) + 1);
             if (word.length() > longwrd.length()) {
                 longwrd = word;
             }
-            input.append(" " + word);
+            sentenceBuilder.add(longwrd);
         }
+        String input = StringUtils.join(sentenceBuilder, " ");
         WordOutput result = getLongestWord(input.toString());
 
         assertThat(MessageFormat.format("When given the string: {0}\n" +
@@ -112,10 +114,10 @@ public class LongestShortestWordTests {
     public void validOutputRandomSentShortestWord() {
 
         List<String> sentenceBuilder = new ArrayList<>();
-        String shortwrd = getAlphaNumericString((int) (5+1 * Math.random()));
+        String shortwrd = getAlphaNumericString(new Random().nextInt(5 + 1) + 1);
         sentenceBuilder.add(shortwrd);
         for (int i = 0; i < 15; i++) {
-            String word = getAlphaNumericString((int) (5+1 * Math.random()));
+            String word = getAlphaNumericString(new Random().nextInt(5 + 1) + 1);
             if (word.length() < shortwrd.length()) {
                 shortwrd = word;
             }
@@ -145,12 +147,9 @@ public class LongestShortestWordTests {
 
         for (int i = 0; i < n; i++) {
 
-            int index
-                    = (int) (AlphaNumericString.length()
-                    * Math.random());
+            int index = new Random().nextInt(AlphaNumericString.length());
 
-            sb.append(AlphaNumericString
-                    .charAt(index));
+            sb.append(AlphaNumericString.charAt(index));
         }
 
         return sb.toString();
